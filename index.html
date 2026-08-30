@@ -53,7 +53,7 @@
   .cp-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-soft); }
   .cp-display { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: -0.01em; }
   .cp-header { max-width: 920px; margin: 0 auto; padding: 2.75rem 1.5rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(246,240,228,0.12); }
-  .cp-logo { width: 88px; height: 88px; flex-shrink: 0; fill: #FFFFFF; }
+  .cp-logo { width: 250px; height: 250px; flex-shrink: 0; fill: #FFFFFF; }
   .cp-title { font-size: 1.7rem; font-weight: 600; line-height: 1.15; margin: 0.35rem 0 0.15rem; }
   .cp-subtitle { color: var(--muted); font-size: 0.92rem; }
   .cp-btn { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; border-radius: 999px; padding: 0.55rem 1.05rem; border: 1px solid rgba(246,240,228,0.25); background: transparent; color: var(--paper); cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.15s ease; white-space: nowrap; }
@@ -138,7 +138,7 @@
     .cp-header { flex-direction: column; }
     .cp-hero-date { font-size: 2rem; }
     .cp-cal-cell { font-size: 0.7rem; }
-    .cp-logo { width: 64px; height: 64px; }
+    .cp-logo { width: 120px; height: 120px; }
   }
 </style>
 </head>
@@ -529,14 +529,15 @@ function App() {
           </div>
         </div>
         <div>
-          {currentUser ? (
-            <div className="cp-userpill">
-              <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>{currentUser.name.split(" ")[0]}</span>
-              <button className="cp-btn cp-btn-icon" title={`Sair (${currentUser.email})`} onClick={handleLogout}><LogOut size={16} /></button>
-            </div>
-          ) : (
-            <div ref={googleBtnRef}></div>
-          )}
+          <div className="cp-userpill" style={{ display: currentUser ? "flex" : "none" }}>
+            {currentUser && (
+              <>
+                <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>{currentUser.name.split(" ")[0]}</span>
+                <button className="cp-btn cp-btn-icon" title={`Sair (${currentUser.email})`} onClick={handleLogout}><LogOut size={16} /></button>
+              </>
+            )}
+          </div>
+          <div ref={googleBtnRef} style={{ display: currentUser ? "none" : "block" }}></div>
         </div>
       </header>
 
